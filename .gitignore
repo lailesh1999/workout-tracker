@@ -1,0 +1,40 @@
+# ========================
+# Node / Backend
+# ========================
+backend/node_modules/
+backend/dist/
+backend/build/
+backend/.env
+backend/.env.*
+
+# ========================
+# Flutter / Mobile
+# ========================
+mobile/workout_tracker/build/
+mobile/workout_tracker/.dart_tool/
+mobile/workout_tracker/.flutter-plugins
+mobile/workout_tracker/.flutter-plugins-dependencies
+mobile/workout_tracker/.metadata
+
+# Android
+mobile/workout_tracker/android/.gradle/
+mobile/workout_tracker/android/app/build/
+mobile/workout_tracker/android/build/
+
+# iOS
+mobile/workout_tracker/ios/Pods/
+mobile/workout_tracker/ios/.symlinks/
+mobile/workout_tracker/ios/Flutter/ephemeral/
+
+# ========================
+# IDE
+# ========================
+.vscode/
+.idea/
+*.iml
+
+# ========================
+# OS
+# ========================
+.DS_Store
+Thumbs.db
