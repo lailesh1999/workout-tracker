@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../provider/workout_notifier.dart';
+import '../widget/workout_widget.dart';
+
 class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
 
@@ -12,8 +15,29 @@ class HomeScreen extends ConsumerStatefulWidget {
 
 class _HomeScreenState extends ConsumerState<HomeScreen> {
   @override
+  void initState() {
+    super.initState();
+    Future.microtask(() {
+      ref.read(workoutProvider.notifier).fetchWorkouts();
+    });
+  }
   @override
   Widget build(BuildContext context) {
+    final state = ref.watch(workoutProvider);
+
+    if (state.isLoading) {
+      return const Scaffold(
+        body: Center(child: CircularProgressIndicator()),
+      );
+    }
+
+    if (state.error != null) {
+      return Scaffold(
+        body: Center(child: Text(state.error!)),
+      );
+    }
+
+    final workouts = state.workouts ?? [];
     return Scaffold(
       backgroundColor: const Color(0xFFF6F7FB),
 
@@ -105,27 +129,19 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
               // 🔹 Workout List
               Expanded(
-                child: ListView(
-                  children: const [
-                    // WorkoutCard(
-                    //   title: 'Full Body HIIT',
-                    //   time: '20 min',
-                    //   level: 'Intermediate',
-                    //   showButton: true,
-                    // ),
-                    // WorkoutCard(
-                    //   title: 'Upper Body Strength',
-                    //   time: '45 min',
-                    //   level: 'Advanced',
-                    // ),
-                    // WorkoutCard(
-                    //   title: 'Yoga Flow',
-                    //   time: '30 min',
-                    //   level: 'Beginner',
-                    // ),
-                  ],
-                ),
+                child: ListView.builder(
+                  itemCount: workouts.length,
+                  itemBuilder: (context, index) {
+                    final w = workouts[index];
+                    return WorkoutCard(
+                      title: w.title,
+                      duration: w.durationMinutes,
+                      difficulty: w.difficulty,
+                      showButton: true, // only first card shows button (like image)
+                    );
+                  },
               ),
+              )
             ],
           ),
         ),

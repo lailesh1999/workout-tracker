@@ -1,3 +1,4 @@
+import 'package:workout_tracker/core/data_models/workout.dart';
 import 'package:workout_tracker/core/repository/repository.dart';
 
 import '../datasource/local/local_datasource.dart';
@@ -9,6 +10,11 @@ class RepositoryImpl implements AppRepository {
 
   RepositoryImpl(
       {required this.remoteDatasource, required this.localDateSource});
+
+  @override
+  Future<List<Workout>> getWorkouts() {
+    return remoteDatasource.fetchWorkouts();
+  }
 
 
 }
