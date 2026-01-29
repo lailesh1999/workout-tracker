@@ -1,13 +1,7 @@
 import { DataTypes, Model } from "sequelize";
 import sequelize from "../config/database";
-import Workout from "./Workout";
-import UserWorkout from "./UserWorkout";
 
-class User extends Model {
-  public id!: number;
-  public name!: string;
-  public email!: string;
-}
+class User extends Model {}
 
 User.init(
   {
@@ -34,12 +28,5 @@ User.init(
     updatedAt: false,
   }
 );
-
-/* MANY-TO-MANY RELATION */
-User.belongsToMany(Workout, {
-  through: UserWorkout,
-  foreignKey: "user_id",
-  otherKey: "workout_id",
-});
 
 export default User;
