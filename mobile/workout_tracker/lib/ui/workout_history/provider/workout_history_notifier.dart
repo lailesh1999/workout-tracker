@@ -27,7 +27,7 @@ class WorkoutHistoryNotifier extends StateNotifier<WorkoutHistoryState> {
   }
 }
 
-final workoutProvider =
+final workoutHistoryProvider =
 StateNotifierProvider<WorkoutHistoryNotifier, WorkoutHistoryState>(
       (ref) => WorkoutHistoryNotifier(),
 );
