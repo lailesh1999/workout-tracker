@@ -1,4 +1,4 @@
-import User from "./user";
+import User from "./User";
 import Workout from "./Workout";
 import UserWorkout from "./UserWorkout";
 
@@ -10,6 +10,18 @@ User.belongsToMany(Workout, {
 
 Workout.belongsToMany(User, {
   through: UserWorkout,
+  foreignKey: "workout_id",
+});
+
+
+
+
+
+UserWorkout.belongsTo(Workout, {
+  foreignKey: "workout_id",
+});
+
+Workout.hasMany(UserWorkout, {
   foreignKey: "workout_id",
 });
 

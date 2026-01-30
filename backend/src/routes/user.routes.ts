@@ -1,16 +1,46 @@
 import { Router } from "express";
-import UserWorkout from "../models/UserWorkout";
 import { calculateStreak } from "../utils/streak";
+import { UserWorkout, Workout } from "../models";
 
 const router = Router();
 
 /* Workout History */
 router.get("/users/:userId/workout-history", async (req, res) => {
-  const data = await UserWorkout.findAll({
-    where: { user_id: req.params.userId },
-    order: [["completed_at", "DESC"]],
+  try {
+    const history = await UserWorkout.findAll({
+      where: {
+        user_id: req.params.userId,
+      },
+      attributes: ["completed_at"],
+      include: [
+        {
+          model: Workout,
+          attributes: ["title", "difficulty", "duration_minutes"],
+        },
+      ],
+      order: [["completed_at", "DESC"]],
+    });
+
+    const response = history.map(item => {
+      const completedAt = new Date(item.completed_at);
+
+      return {
+        title: item.Workout!.title,
+        difficulty: item.Workout!.difficulty,
+        durationMinutes: item.Workout!.duration_minutes,
+        date: completedAt.toISOString().split("T")[0], // YYYY-MM-DD
+        
+      };
+    });
+
+    res.json(response);
+  } catch (error) {
+  console.error("WORKOUT HISTORY ERROR 👉", error);
+  res.status(500).json({
+    error: "Failed to fetch workout history",
+    details: error instanceof Error ? error.message : error,
   });
-  res.json(data);
+}
 });
 
 /* Complete Workout */

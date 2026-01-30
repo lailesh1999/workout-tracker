@@ -1,12 +1,17 @@
 import { DataTypes, Model } from "sequelize";
 import sequelize from "../config/database";
+import Workout from "./Workout";
 
 class UserWorkout extends Model {
   public id!: number;
   public user_id!: number;
   public workout_id!: number;
   public completed_at!: Date;
+
+  public Workout?: Workout;
 }
+
+
 
 UserWorkout.init(
   {

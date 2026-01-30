@@ -1,6 +1,6 @@
 import { DataTypes, Model } from "sequelize";
 import sequelize from "../config/database";
-import User from "../models/user";
+import User from "../models/User";
 import UserWorkout from "./UserWorkout";
 
 class Workout extends Model {
@@ -10,6 +10,7 @@ class Workout extends Model {
   public duration_minutes!: number;
   public difficulty!: "Beginner" | "Intermediate" | "Advanced";
 }
+
 
 Workout.init(
   {
