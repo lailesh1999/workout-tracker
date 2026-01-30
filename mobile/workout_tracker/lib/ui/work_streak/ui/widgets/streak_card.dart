@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../core/data_models/workour_history.dart';
 import '../../../../core/data_models/worout_streak.dart';
 import '../../../../core/utils/date_format_helper.dart';
 

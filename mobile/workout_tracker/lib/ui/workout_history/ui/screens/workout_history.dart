@@ -4,7 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:workout_tracker/ui/work_streak/ui/widgets/streak_section.dart';
 
 import '../../../work_streak/provider/workout_streak_notifier.dart';
-import '../../../work_streak/ui/widgets/streak_card.dart';
 import '../../provider/workout_history_notifier.dart';
 import '../widgets/work_history_card.dart';
 
@@ -57,7 +56,6 @@ class _WorkoutHistoryScreenState
             children: [
               SizedBox(height: 16.h),
 
-              // 🔹 Header
               Text(
                 'Workout History',
                 style: TextStyle(
@@ -68,12 +66,10 @@ class _WorkoutHistoryScreenState
 
               SizedBox(height: 12.h),
 
-              // 🔥 Streak Card
               StreakSection(),
 
               SizedBox(height: 20.h),
 
-              // 🔹 History List
               Expanded(
                 child: ListView.builder(
                   itemCount: history.length,

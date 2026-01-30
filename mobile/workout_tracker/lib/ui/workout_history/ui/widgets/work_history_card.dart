@@ -27,7 +27,6 @@ class WorkoutHistoryCard extends StatelessWidget {
       ),
       child: Row(
         children: [
-          // Icon
           Container(
             padding: EdgeInsets.all(10.w),
             decoration: BoxDecoration(
@@ -38,7 +37,6 @@ class WorkoutHistoryCard extends StatelessWidget {
           ),
           SizedBox(width: 12.w),
 
-          // Info
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -62,7 +60,6 @@ class WorkoutHistoryCard extends StatelessWidget {
             ),
           ),
 
-          // Date
           Text(
             formatDate(item.date),
             style: TextStyle(

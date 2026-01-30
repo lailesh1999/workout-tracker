@@ -1,3 +1,4 @@
+import 'package:workout_tracker/core/data_models/complete_workout_response.dart';
 import 'package:workout_tracker/core/data_models/workour_history.dart';
 import 'package:workout_tracker/core/data_models/workout.dart';
 import 'package:workout_tracker/core/data_models/worout_streak.dart';
@@ -26,6 +27,12 @@ class RepositoryImpl implements AppRepository {
   @override
   Future<WorkoutStreak> getWorkoutStreak() {
     return remoteDatasource.getWorkoutStreak();
+  }
+
+  @override
+  Future<CompleteWorkoutResponse> completeWorkout({required DateTime completedAt}) {
+    // TODO: implement completeWorkout
+    return remoteDatasource.completeWorkout(completedAt: completedAt);
   }
 
 

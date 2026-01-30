@@ -1,7 +1,6 @@
 
 import 'package:flutter/material.dart';
 
-import '../../../../core/di/service_locator.dart';
 import '../../../splash_screen/ui/screen/spash_screen.dart';
 
 

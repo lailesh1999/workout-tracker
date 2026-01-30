@@ -4,6 +4,7 @@ import 'package:workout_tracker/core/data_models/workout.dart';
 import 'package:workout_tracker/core/datasource/remote/remote_datasource.dart';
 
 import '../../const/constants.dart';
+import '../../data_models/complete_workout_response.dart';
 import '../../data_models/worout_streak.dart';
 import '../../http_client/dio_client.dart';
 
@@ -55,6 +56,7 @@ class RemoteDatasourceImpl implements RemoteDatasource {
       return [WorkoutHistory.withError(e.toString())];
     }
   }
+  @override
   Future<WorkoutStreak> getWorkoutStreak() async {
     try {
       final response = await dioInstance.dioInstance!.get(
@@ -70,6 +72,29 @@ class RemoteDatasourceImpl implements RemoteDatasource {
       );
     } catch (e) {
       return WorkoutStreak.withError(e.toString());
+    }
+  }
+
+  @override
+  Future<CompleteWorkoutResponse> completeWorkout({
+    required DateTime completedAt,
+  }) async {
+    try {
+      final response = await dioInstance.dioInstance!.post(
+        "${dioInstance.baseUrl}${Constants.markComplete}",
+        data: {
+          "completedAt": completedAt.toIso8601String(),
+        },
+      );
+
+      return CompleteWorkoutResponse.fromJson(response.data);
+    } on DioException catch (e) {
+      return CompleteWorkoutResponse.withError(
+        e.response?.data?['error'] ??
+            "Failed to complete workout",
+      );
+    } catch (e) {
+      return CompleteWorkoutResponse.withError(e.toString());
     }
   }
 

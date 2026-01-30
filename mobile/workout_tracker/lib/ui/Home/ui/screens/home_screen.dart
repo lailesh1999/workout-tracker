@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../core/data_models/workour_history.dart';
 import '../../../WorkoutList/ui/screens/workout_tab.dart';
 import '../../../workout_history/ui/screens/workout_history.dart';
 

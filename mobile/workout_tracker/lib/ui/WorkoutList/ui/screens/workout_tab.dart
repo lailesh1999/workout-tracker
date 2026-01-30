@@ -1,9 +1,12 @@
+import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../complete_workout/provider/complete_workout_notifier.dart';
+import '../../../complete_workout/provider/complete_workout_state.dart';
+import '../../../theme/Dialogue.dart';
 import '../../../work_streak/provider/workout_streak_notifier.dart';
-import '../../../workout_history/provider/workout_history_notifier.dart';
 import '../../provider/workout_notifier.dart';
 import '../widgets/workout_widget.dart';
 
@@ -19,12 +22,27 @@ class _WorkoutsTabState extends ConsumerState<WorkoutsTab> {
   @override
   void initState() {
     super.initState();
+
     Future.microtask(() {
       ref.read(workoutProvider.notifier).fetchWorkouts();
     });
-  }
+        }
   @override
   Widget build(BuildContext context) {
+    ref.listen<CompleteWorkoutState>(
+        completeWorkoutProvider,
+            (previous, next) {
+          if (next.error != null && previous?.error != next.error) {
+            BotToast.showText(text: next.error!);
+          }
+          if (next.data != null && previous?.data != next.data) {
+            showWorkoutCompletedDialog(
+              context,
+              title: next.data!.message ?? "Workout completed",
+              streak: next.data!.streak ?? 0,
+            );
+          }
+        });
     final state = ref.watch(workoutProvider);
     final streakCount = ref.watch(workoutStreakProvider);
     if (state.isLoading) {
@@ -113,10 +131,12 @@ class _WorkoutsTabState extends ConsumerState<WorkoutsTab> {
                 itemBuilder: (context, index) {
                   final w = workouts[index];
                   return WorkoutCard(
+                    workout_id:w.id,
                     title: w.title,
                     duration: w.durationMinutes,
                     difficulty: w.difficulty,
-                    showButton: true, // only first card shows button (like image)
+                     description: w.description,
+                    showButton: true,
                   );
                 },
               ),
@@ -126,4 +146,6 @@ class _WorkoutsTabState extends ConsumerState<WorkoutsTab> {
       ),
     );
   }
+
+
 }
