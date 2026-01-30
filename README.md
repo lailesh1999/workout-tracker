@@ -6,20 +6,6 @@ Node.js + Express (Backend)
 MySQL (XAMPP) (Database)
 This project helps users track workouts, workout history, and streaks.
 
-workout-tracker/
-│
-├── backend/
-│   ├── src/
-│   ├── database/
-│   │   └── workouts.sql
-│   ├── .env
-│   └── package.json
-│
-├── flutter_app/
-│   ├── lib/
-│   └── pubspec.yaml
-│
-└── README.md
 
 🛠 Prerequisites
 
