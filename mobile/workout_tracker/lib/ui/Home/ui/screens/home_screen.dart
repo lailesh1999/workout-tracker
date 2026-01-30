@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../core/data_models/workour_history.dart';
+import '../../../workout_history/ui/screens/workout_history.dart';
 import '../../provider/workout_notifier.dart';
 import '../widget/workout_widget.dart';
 
@@ -14,6 +16,12 @@ class HomeScreen extends ConsumerStatefulWidget {
 }
 
 class _HomeScreenState extends ConsumerState<HomeScreen> {
+
+  int _currentIndex = 0;
+  final List<Widget> _pages = [
+    const HomeScreen(),
+    WorkoutHistoryScreen(),
+  ];
   @override
   void initState() {
     super.initState();
@@ -43,7 +51,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
       // 🔹 Bottom Navigation
       bottomNavigationBar: BottomNavigationBar(
-        currentIndex: 0,
+        currentIndex: _currentIndex,
         selectedItemColor: Colors.black,
         unselectedItemColor: Colors.grey,
         items: const [
