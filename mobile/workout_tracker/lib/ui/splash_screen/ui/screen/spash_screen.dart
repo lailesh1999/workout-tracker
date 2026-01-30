@@ -21,7 +21,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
   }
 
   void _redirectToLogin() async {
-    // Wait for 2 seconds then redirect to login
+    // Wait for 2 seconds then redirect to homeScreen
     await Future.delayed(const Duration(seconds: 3));
 
     if (mounted) {
