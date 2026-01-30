@@ -4,6 +4,7 @@ import '../../../core/di/service_locator.dart';
 import '../../../core/repository/repository.dart';
 import 'complete_workout_state.dart';
 
+// to call the api when we press mark complete button.
 class CompleteWorkoutNotifier extends StateNotifier<CompleteWorkoutState> {
   CompleteWorkoutNotifier() : super(const CompleteWorkoutState());
 
