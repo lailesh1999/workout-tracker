@@ -35,7 +35,6 @@ class MyApp extends StatelessWidget {
             return widget!;
           },
           navigatorObservers: [BotToastNavigatorObserver()],
-          theme: ThemeConst.lightThemeData,
           home: const AppMain(),
         );
       },

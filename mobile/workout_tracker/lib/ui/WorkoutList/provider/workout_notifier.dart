@@ -1,5 +1,4 @@
 import 'package:flutter_riverpod/legacy.dart';
-import 'package:workout_tracker/core/datasource/dummy_database/dummy_data_workouts.dart';
 import 'package:workout_tracker/ui/WorkoutList/provider/workout_state.dart';
 
 import '../../../core/di/service_locator.dart';

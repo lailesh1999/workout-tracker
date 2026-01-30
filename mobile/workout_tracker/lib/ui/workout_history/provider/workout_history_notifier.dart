@@ -17,7 +17,7 @@ class WorkoutHistoryNotifier extends StateNotifier<WorkoutHistoryState> {
       final data = await repository.getWorkOutHistory();
       state = state.copyWith(
         isLoading: false,
-        workoutHistory: dummyWorkoutHistory,
+        workoutHistory: data,
       );
     } catch (e) {
       state = state.copyWith(
