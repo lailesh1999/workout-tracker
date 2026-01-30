@@ -1,5 +1,6 @@
 import 'package:workout_tracker/core/data_models/workour_history.dart';
 import 'package:workout_tracker/core/data_models/workout.dart';
+import 'package:workout_tracker/core/data_models/worout_streak.dart';
 import 'package:workout_tracker/core/repository/repository.dart';
 
 import '../datasource/local/local_datasource.dart';
@@ -20,6 +21,11 @@ class RepositoryImpl implements AppRepository {
   @override
   Future<List<WorkoutHistory>> getWorkOutHistory() {
     return remoteDatasource.getWorkOutHistory();
+  }
+
+  @override
+  Future<WorkoutStreak> getWorkoutStreak() {
+    return remoteDatasource.getWorkoutStreak();
   }
 
 

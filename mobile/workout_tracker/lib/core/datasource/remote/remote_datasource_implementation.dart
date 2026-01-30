@@ -4,6 +4,7 @@ import 'package:workout_tracker/core/data_models/workout.dart';
 import 'package:workout_tracker/core/datasource/remote/remote_datasource.dart';
 
 import '../../const/constants.dart';
+import '../../data_models/worout_streak.dart';
 import '../../http_client/dio_client.dart';
 
 class RemoteDatasourceImpl implements RemoteDatasource {
@@ -54,4 +55,22 @@ class RemoteDatasourceImpl implements RemoteDatasource {
       return [WorkoutHistory.withError(e.toString())];
     }
   }
+  Future<WorkoutStreak> getWorkoutStreak() async {
+    try {
+      final response = await dioInstance.dioInstance!.get(
+        "${dioInstance.baseUrl}${Constants.getWorkoutStreak}",
+      );
+
+      return WorkoutStreak.fromJson(response.data);
+    } on DioException catch (e) {
+      return WorkoutStreak.withError(
+        dioInstance.handleStatusCodeError(
+          e.response?.statusCode,
+        ),
+      );
+    } catch (e) {
+      return WorkoutStreak.withError(e.toString());
+    }
+  }
+
 }

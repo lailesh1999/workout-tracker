@@ -6,6 +6,7 @@ class Constants{
   static const String appName = "Work out Tracker";
   static const String getWorkOuts = "workouts";
   static const String getWorkOutsHistory = "users/1/workout-history";
+  static const String getWorkoutStreak ="users/1/streak";
 
 
   //APIs

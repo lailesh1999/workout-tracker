@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../work_streak/provider/workout_streak_notifier.dart';
 import '../../../workout_history/provider/workout_history_notifier.dart';
 import '../../provider/workout_notifier.dart';
 import '../widgets/workout_widget.dart';
@@ -25,7 +26,7 @@ class _WorkoutsTabState extends ConsumerState<WorkoutsTab> {
   @override
   Widget build(BuildContext context) {
     final state = ref.watch(workoutProvider);
-
+    final streakCount = ref.watch(workoutStreakProvider);
     if (state.isLoading) {
       return const Center(child: CircularProgressIndicator());
     }
@@ -91,7 +92,7 @@ class _WorkoutsTabState extends ConsumerState<WorkoutsTab> {
                         color: Colors.white),
                     SizedBox(width: 8.w),
                     Text(
-                      '5-day streak!',
+                      '${streakCount.data!.streak}  days streak',
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 16.sp,
